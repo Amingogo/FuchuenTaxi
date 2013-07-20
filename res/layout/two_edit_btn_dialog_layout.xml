@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+   	android:layout_height="wrap_content"
+   	android:padding="3dp">
+    
+    <RelativeLayout 
+        android:id="@+id/dialog_content_layout1"
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content">
+        
+        <TextView
+	        android:id="@+id/dialog_subtitle1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/lightgray"
+		    android:textSize="20dp"
+		    android:text="@string/address_subtitle"/>
+        
+        <EditText 
+            android:id="@+id/dialog_edittext1"
+		    android:layout_width="380dp"
+		    android:layout_height="wrap_content"
+		    android:textSize="20dp"
+		    android:hint="@string/enter_hint"
+		    android:layout_toRightOf="@id/dialog_subtitle1"
+		    android:layout_marginLeft="5dp"/>
+        
+    </RelativeLayout>	
+    
+    <RelativeLayout 
+        android:id="@+id/dialog_content_layout2"
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/dialog_content_layout1">
+        
+        <TextView
+	        android:id="@+id/dialog_subtitle2"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/lightgray"
+		    android:textSize="20dp"
+		    android:text="@string/location_subtitle"/>
+        
+        <EditText 
+            android:id="@+id/dialog_edittext2"
+		    android:layout_width="380dp"
+		    android:layout_height="wrap_content"
+		    android:textSize="20dp"
+		    android:hint="@string/enter_hint"
+		    android:layout_toRightOf="@id/dialog_subtitle2"
+		    android:layout_marginLeft="5dp"/>
+        
+    </RelativeLayout>	
+    
+    <LinearLayout 
+        android:id="@+id/passenger_number_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_content_layout2">
+        <TextView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:gravity="center_vertical"
+        	style="@style/mediumBlockText"
+        	android:text="@string/passenger_number"/>
+        <Spinner
+	        android:id="@+id/passenger_spinnner"
+	        android:layout_width="180dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="5dp">
+  		</Spinner>
+    		
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/luggage_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passenger_number_layout">
+        <TextView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:gravity="center_vertical"
+        	style="@style/mediumBlockText"
+        	android:text="@string/luggage_number"/>
+        <Spinner
+	        android:id="@+id/luggage_spinnner"
+	        android:layout_width="180dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="5dp">
+  		</Spinner>
+    		
+    </LinearLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/dialog_remark_layout"
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/luggage_layout">
+        
+        <TextView
+	        android:id="@+id/dialog_remark_subtitle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/lightgray"
+		    android:textSize="20dp"
+		    android:text="@string/remark_subtitle"/>
+        
+        <EditText 
+            android:id="@+id/dialog_remark_edittext"
+		    android:layout_width="380dp"
+		    android:layout_height="wrap_content"
+		    android:gravity="top"
+		    android:minLines="2"
+		    android:textSize="20dp"
+		    android:hint="@string/remark_hint"
+		    android:layout_toRightOf="@id/dialog_remark_subtitle"
+		    android:layout_marginLeft="5dp"/>
+        
+    </RelativeLayout>
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/dialog_remark_layout"
+	    android:layout_marginTop="10dp"
+	    android:orientation="horizontal">
+	    <Button 
+	        android:id="@+id/cancel_btn"
+	        android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:textSize="15dp"
+		    android:text="@string/cancel"/>
+    
+	    <Button 
+	        android:id="@+id/ok_btn"
+	        android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:textSize="15dp"
+		    android:text="@string/ok"/>
+        
+    </LinearLayout>
+    	
+</RelativeLayout>

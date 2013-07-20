@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- system -->
+	<string name="versionCode">0.2.2</string>
+	<string name="versionName">基本功能搶鮮版</string>
+	<string name="id">a14fb10eb869431</string>
+	<string name="googleMapApiKey">0gzkigDOEurMAGpfHdyP20gihvlnrkIC9URX1tg</string>
+    <string name="app_name">福春計程車</string>
+    <string name="phone_number">0916098379</string>
+    <string name="emailAddress">taxi_tw@hotmail.com</string>
+    <string name="phone_number2">0916833269</string>
+    <string name="emailAddress2">luiwm0127@hotmail.com</string>
+    
+    <!-- opening -->
+    <string name="opening_title">歡迎使用呂福春個人車行叫車APP</string>
+    
+    <!-- main menu page -->
+    <string name="main_menu_title">福春TAXI</string>
+    <string name="main_menu_callCar_btn">預約叫車</string>
+    <string name="main_menu_loopUp_btn">預約查詢</string>
+	<string name="main_menu_tripInfo_btn">推薦行程</string>
+	<string name="main_menu_about_menu">關於我</string>
+	<string name="main_menu_subtitle">《桃園國際機場 ‧ 長途包車旅遊》《計價方式請參閱「關於本車」，或進入「推薦行程」，參閱「預約專線」項目，謝謝！》</string>
+	<string name="main_menu_blacbboard_txt1">1.目前僅開放長途預約叫車，不提供臨時叫車服務。</string>
+	<string name="main_menu_blacbboard_txt2">2.出發地點限定於台北地區，並不包括市區短程路線。造成不便請多包涵！</string>
+	<string name="main_menu_blacbboard_txt3">祝您旅途愉快 事事順心</string>
+	
+	<!-- call car page -->
+	<string name="phone_btn">電話預約</string>
+	<string name="email_btn">Email預約</string>
+	<string name="mms_btn">簡訊預約</string>
+	
+	<!-- phone call page -->
+	<string name="phone_call_title">電話預約</string>
+	<string name="phone_call_hint">使用說明:</string>
+	<string name="phone_call_line1">1.歡迎乘客預約用車，恕不提供臨時叫車服務。</string>
+	<string name="phone_call_line2">2.請詳細告知預約時間、搭車地點、目的地點。</string>
+	<string name="phone_call_line3">3.若有其他服務需求亦請先行告知。</string>
+	<string name="phone_call_line4">以上說明，感謝您的配合。請點擊下方按鈕進行撥號。</string>
+	
+	<!-- email page -->
+	<string name="email_title">Email預約</string>
+	<string name="email_line2">2.請提供以下資訊。對於每項資訊，系統檢查核可後將顯示綠燈圖示。</string>
+	<string name="email_line3">3.集滿三個綠燈即可進行郵件傳送。</string>
+	<string name="email_line4">以上說明，感謝您的配合。填寫完畢請點擊最下方按鈕進行發送。</string>
+	<string name="light_hint">請點擊下方燈號輸入資料:</string>
+	<string name="light_remined">注意:系統會保存上次的輸入(除日期時間設為現在外)，但仍需確認各燈號內容並點選「確定」後，方可切回綠燈。</string>
+	
+	<!-- sms page -->
+	<string name="sms_title">簡訊預約</string>
+	<string name="sms_line3">3.集滿三個綠燈即可進行簡訊傳送。</string>
+	
+	<!-- Dialog -->
+	<string name="cancel">取消</string>
+	<string name="ok">確定</string>
+	<string name="phone_message_part1">按下確定後，將為您撥號至司機呂福春</string>
+	<string name="phone_message_part2">電話：0916098379</string>
+	<string name="address_subtitle">地址:</string>
+	<string name="location_subtitle">地點:</string>
+	<string name="address_example">範例:台北市敦化南路一段245號</string>
+	<string name="location_example">範例:敦南誠品</string>
+	<string name="pick_destination_dialog_title">請填寫地址或地點</string>
+	<string name="enter_hint">請在此點擊輸入。</string>
+	<string name="passenger_info">乘客資訊</string>
+	<string name="date_time_info">時間資訊</string>
+	<string name="from_to_info">地點資訊</string>
+	<string name="remark_hint">例如:機場接送，可註明航班資訊、航廈等等。</string>
+	<string name="remark_subtitle">備註:</string>
+	<string name="from_txt">出發地:</string>
+	<string name="to_txt">目的地:</string>
+	<string name="from_hint">請選擇出發地(地址或地點)。</string>
+	<string name="to_hint">請選擇目的地(地址或地點)。</string>
+	<string name="how_to_call_you">如何稱呼:</string>
+	
+	<!-- Toast -->
+	<string name="write_info_hint">提示：資料填寫齊全後才會轉為綠燈！</string>
+	
+	<!-- message content -->
+	<string name="select_others_subtitle">備註:</string>
+	<string name="select_others_hint">例如:機場接送，可註明航班資訊、航廈等等。</string>
+	<string name="select_others_dialog_title">發送簡訊</string>
+	<string name="select_others_dialog_preview">預覽:</string>
+	<string name="mms_content_first">呂先生你好:跟你預約，</string>
+	<string name="mms_content_year">年</string>
+	<string name="mms_content_month">月</string>
+	<string name="mms_content_day">日</string>
+	<string name="mms_content_hour">點</string>
+	<string name="mms_content_min">分</string>
+	<string name="mms_content_from">從</string>
+	<string name="mms_content_depart">出發</string>
+	<string name="mms_content_to">到</string>
+	<string name="passenger_number">乘客人數:</string>
+	<string name="luggage_number">行李數量:</string>
+	<string name="luggage_number_many">很多</string>
+	<string name="luggage_number_little_many">有點多</string>
+	<string name="luggage_number_little_less">蠻少的</string>
+	<string name="luggage_number_less">很少</string>
+	<string name="passenge">乘客</string>
+	<string name="people">人</string>
+	<string name="luggage">行李</string>
+	<string name="returnBack">請回覆此次預約！</string>
+	<string name="sendSuccess">傳送成功</string>
+	<string name="sendFail">傳送失敗</string>
+	<string name="contactNumber">聯絡電話:</string>
+	
+	<!-- send email -->
+	<string name="EmailDialogTitle">傳送Email</string>
+	
+	<!-- common -->
+	<string name="next">下一步</string>
+	<string name="back">上一步</string>
+	<string name="loading_title">請稍後</string>
+	<string name="loading">讀取中...</string>
+	
+</resources>

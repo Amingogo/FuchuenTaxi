@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+    <LinearLayout
+	    android:id="@+id/ad_layout" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true">
+	</LinearLayout>
+        	
+    <ScrollView 
+        android:id="@+id/emailMainLayout"
+        android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:background="@color/yellow2"
+    	android:layout_above="@id/ad_layout">
+        
+        <RelativeLayout 
+	        android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent">
+	    	
+	        <TextView
+	            android:id="@+id/tabContentTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="5dp"
+		        style="@style/TabContentTitleText"
+		        android:text="@string/email_title"/>
+	        
+	        <TextView
+	            android:id="@+id/tabContentHint"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/tabContentTitle"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginLeft="5dp"
+		        style="@style/TabContentNormalText"
+		        android:text="@string/phone_call_hint"/>
+	        
+	        <TextView
+	            android:id="@+id/tabContentLine1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/tabContentHint"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginLeft="10dp"
+		        style="@style/TabContentNormalText"
+		        android:text="@string/phone_call_line1"/>
+	        
+	        <TextView
+	            android:id="@+id/tabContentLine2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/tabContentLine1"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginLeft="10dp"
+		        style="@style/TabContentNormalText"
+		        android:text="@string/email_line2"/>
+	        
+	        <TextView
+	            android:id="@+id/tabContentLine3"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/tabContentLine2"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginLeft="10dp"
+		        style="@style/TabContentNormalText"
+		        android:text="@string/email_line3"/>
+	        
+	        <TextView
+	            android:id="@+id/tabContentLine4"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/tabContentLine3"
+		        android:layout_marginTop="15dp"
+		        android:layout_marginLeft="10dp"
+		        style="@style/TabContentNormalText"
+		        android:text="@string/email_line4"/>
+	        
+	        <TextView
+	            android:id="@+id/light_hint"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/tabContentLine4"
+		        android:layout_marginTop="25dp"
+		        android:layout_marginLeft="10dp"
+		        style="@style/TabContentNormalText"
+		        android:text="@string/light_hint"/>
+	        
+	        <TextView
+	            android:id="@+id/light_remined"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/light_hint"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginLeft="10dp"
+		        style="@style/TabContentNormalText"
+		        android:textColor="@color/red"
+		        android:textSize="15dp"
+		        android:text="@string/light_remined"/>
+	        
+	        <LinearLayout
+	            android:id="@+id/light_layout" 
+	            android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/light_remined"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="10dp"
+		        android:orientation="horizontal">
+
+	            <Button 
+		            android:id="@+id/infoBtn1"
+		            android:layout_width="77dp"
+			        android:layout_height="77dp"
+			        android:background="@drawable/icon_red_light"/>
+	            <Button 
+		            android:id="@+id/infoBtn2"
+		            android:layout_width="77dp"
+			        android:layout_height="77dp"
+			        android:layout_marginLeft="10dp"
+			        android:layout_marginRight="10dp"
+			        android:background="@drawable/icon_red_light"/>
+	            <Button 
+		            android:id="@+id/infoBtn3"
+		            android:layout_width="77dp"
+			        android:layout_height="77dp"
+			        android:background="@drawable/icon_red_light"/>
+	            
+	        </LinearLayout>
+	        
+	        <Button 
+	            android:id="@+id/sendEmailBtn"
+	            android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/send_email_btn"
+		        android:layout_below="@id/light_layout"
+		        android:layout_marginTop="20dp"
+		        android:layout_marginBottom="10dp"
+		        android:layout_centerHorizontal="true"/>
+    	
+    	</RelativeLayout>
+    
+    </ScrollView>
+
+</RelativeLayout>

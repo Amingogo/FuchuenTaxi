@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+	
+    <RelativeLayout 
+        android:id="@+id/mainMenuLayout"
+        android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:background="@color/yellow2">
+    	
+        <TextView
+            android:id="@+id/main_menu_title_txt"
+	        android:layout_width="fill_parent"
+	        android:layout_height="60dp"
+	        android:background="@drawable/title_background"
+	        android:paddingTop="5dp"
+	        android:paddingBottom="2dp"
+	        android:layout_centerHorizontal="true"
+	        android:gravity="center"
+	        style="@style/mainTitleText"
+	        android:text="@string/main_menu_title"/>
+        
+        <TextView
+            android:id="@+id/marquee_subtitle_txt"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@color/darkGray"
+	        android:layout_below="@id/main_menu_title_txt"
+	        android:paddingTop="2dp"
+	        android:paddingBottom="2dp"
+	        android:paddingLeft="15dp"
+	        android:paddingRight="15dp"
+	        style="@style/subTitleTextWithMarquee"
+	        android:text="@string/main_menu_subtitle"/>
+        
+        <LinearLayout
+            android:id="@+id/ad_layout" 
+            android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:gravity="center">   
+        </LinearLayout>
+		        
+		<ScrollView 
+		    android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:layout_below="@id/marquee_subtitle_txt"
+        	android:layout_above="@id/ad_layout">
+		    
+		    <RelativeLayout 
+	            android:layout_width="fill_parent"
+	        	android:layout_height="fill_parent">
+            
+		        <Gallery
+		            android:id="@+id/photo_gallery" 
+		            android:layout_width="fill_parent"
+		        	android:layout_height="200dp" 
+		        	android:layout_below="@id/marquee_subtitle_txt" 
+		        	android:layout_marginTop="5dp"
+		        	android:layout_marginBottom="5dp"/>
+		        
+	        	<RelativeLayout
+	        	    android:id="@+id/blackboard_layout" 
+	        	    android:layout_width="fill_parent"
+		        	android:layout_height="180dp"
+		        	android:background="@drawable/img_small_blackboard"
+		        	android:layout_below="@id/photo_gallery"
+		        	android:layout_centerHorizontal="true">
+		        	
+	        	    <TextView
+	        	        android:id="@+id/blackboard_line1" 
+	        	        android:layout_width="fill_parent"
+		        		android:layout_height="wrap_content"
+		        		android:layout_marginTop="23dp"
+		        		android:paddingLeft="40dp"
+		        		android:paddingRight="35dp"
+		        		style="@style/BlackboardText"
+		        		android:text="@string/main_menu_blacbboard_txt1"/>
+	        	    
+	        	    <TextView
+	        	        android:id="@+id/blackboard_line2" 
+	        	        android:layout_width="fill_parent"
+		        		android:layout_height="wrap_content"
+		        		android:layout_below="@id/blackboard_line1"
+		        		android:layout_marginTop="5dp"
+		        		android:paddingLeft="40dp"
+		        		android:paddingRight="35dp"
+		        		style="@style/BlackboardText"
+		        		android:text="@string/main_menu_blacbboard_txt2"/>
+	        	    
+	        	    <TextView 
+	        	        android:id="@+id/blackboard_line3"
+	        	        android:layout_width="fill_parent"
+		        		android:layout_height="wrap_content"
+		        		android:layout_below="@id/blackboard_line2"
+		        		android:layout_marginTop="10dp"
+		        		android:paddingLeft="40dp"
+		        		android:paddingRight="35dp"
+		        		style="@style/BlackboardText"
+		        		android:text="@string/main_menu_blacbboard_txt3"/>
+
+	        	    <TextView
+			            android:id="@+id/main_menu_versionName_txt"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentBottom="true"
+				        android:layout_alignParentRight="true"
+				        android:layout_marginBottom="12dp"
+				        android:layout_marginRight="40dp"
+				        style="@style/BlackboardText"
+				        android:textSize="10dp"
+				        android:text="@string/versionName"/>
+		        
+			        <TextView
+			            android:id="@+id/main_menu_versionCode_txt"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentBottom="true"
+				        android:layout_marginBottom="12dp"
+				        android:layout_marginRight="5dp"
+				        android:layout_toLeftOf="@id/main_menu_versionName_txt"
+				        style="@style/BlackboardText"
+				        android:textSize="10dp"
+				        android:text="@string/versionCode"/>
+	        	    
+	        	</RelativeLayout>
+		        
+	            <LinearLayout 
+	                android:id="@+id/btn_layout"
+	                android:layout_width="wrap_content"
+		        	android:layout_height="wrap_content"
+		        	android:layout_below="@id/blackboard_layout"
+		        	android:layout_centerHorizontal="true"
+		        	android:orientation="horizontal">
+	                
+	                <Button 
+			            android:id="@+id/callCar_btn"
+			            android:layout_width="77dp"
+				        android:layout_height="77dp"
+				        android:layout_weight="1"
+				        android:background="@drawable/phone_btn"
+				        android:layout_centerHorizontal="true"
+				        style="@style/menuButtonText"/>
+	        
+			        <Button 
+			            android:id="@+id/lookup_btn"
+			            android:layout_width="77dp"
+				        android:layout_height="77dp"
+				        android:layout_weight="1"
+				        android:background="@drawable/lookup_btn"
+				        android:layout_centerHorizontal="true"
+						style="@style/menuButtonText"/>
+			        
+			        <Button 
+			            android:id="@+id/tripInfo_btn"
+			            android:layout_width="77dp"
+				        android:layout_height="77dp"
+				        android:layout_weight="1"
+				        android:background="@drawable/trip_btn"
+				        android:layout_centerHorizontal="true"
+				        style="@style/menuButtonText"/>
+	                
+	                <Button 
+			            android:id="@+id/aboutMe_btn"
+			            android:layout_width="77dp"
+				        android:layout_height="77dp"
+				        android:layout_weight="1"
+				        android:background="@drawable/about_btn"
+				        android:layout_centerHorizontal="true"
+				        style="@style/menuButtonText"/>
+	                
+	            </LinearLayout>
+		        
+        	</RelativeLayout>
+        
+		</ScrollView>
+        
+    </RelativeLayout>
+
+</LinearLayout>
