@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+   	android:layout_height="wrap_content"
+   	android:padding="5dp"
+   	android:background="@drawable/black_border" >
+        
+    <TextView 
+        android:id="@+id/passenger_name_title"
+        android:layout_width="wrap_content"
+		android:layout_height="40dp"
+		android:gravity="center_vertical"
+		style="@style/Style_Font_Large_Black_Bold"
+		android:text="@string/name_title" />
+    <EditText 
+        android:id="@+id/passenger_name"
+        android:layout_width="190dp"
+		android:layout_height="wrap_content"
+		android:minHeight="40dp"
+		android:layout_toRightOf="@id/passenger_name_title"
+		android:paddingLeft="3dp"
+		android:paddingRight="3dp"
+		android:gravity="left|center_vertical"
+		android:background="@drawable/dark_gray_border"
+		android:textCursorDrawable="@null"
+		style="@style/Style_Font_Large_White" />
+        
+    <TextView 
+        android:id="@+id/passenger_count_title"
+        android:layout_width="wrap_content"
+   		android:layout_height="45dp"
+   		android:layout_below="@id/passenger_name"
+   		android:layout_marginTop="5dp"
+   		android:gravity="center_vertical"
+   		style="@style/Style_Font_Large_Black_Bold"
+   		android:text="@string/people_title" />
+    <Spinner
+	    android:id="@+id/passenger_count_spinner"
+	    android:layout_width="100dp"
+	    android:layout_height="45dp"
+	    android:layout_below="@id/passenger_name"
+	    android:layout_toRightOf="@id/passenger_count_title"
+	    android:layout_marginTop="5dp"
+	    android:gravity="center" />
+        
+    <TextView 
+        android:id="@+id/passenger_date_time_title"
+        android:layout_width="wrap_content"
+		android:layout_height="45dp"
+		android:layout_below="@id/passenger_count_spinner"
+		android:gravity="center_vertical"
+		style="@style/Style_Font_Large_Black_Bold"
+		android:text="@string/time_title" />
+    <TextView 
+        android:id="@+id/take_taxi_date"
+        android:layout_width="150dp"
+		android:layout_height="40dp"
+		android:layout_below="@id/passenger_count_spinner"
+		android:layout_toRightOf="@id/passenger_date_time_title"
+		android:layout_marginTop="5dp"
+		android:gravity="center"
+		android:background="@drawable/dark_gray_border"
+		style="@style/Style_Font_Large_White"
+		android:text="@string/date_hint" />
+    <TextView 
+        android:id="@+id/take_taxi_time"
+        android:layout_width="150dp"
+		android:layout_height="40dp"
+		android:layout_below="@id/take_taxi_date"
+		android:layout_alignLeft="@id/take_taxi_date"
+		android:layout_marginTop="5dp"
+		android:gravity="center"
+		android:background="@drawable/dark_gray_border"
+		style="@style/Style_Font_Large_White"
+		android:text="@string/time_hint" />
+        
+    <TextView 
+        android:id="@+id/passenger_start_title"
+        android:layout_width="wrap_content"
+		android:layout_height="45dp"
+		android:layout_below="@id/take_taxi_time"
+		android:gravity="center_vertical"
+		style="@style/Style_Font_Large_Black_Bold"
+		android:text="@string/start_title" />
+    <EditText 
+        android:id="@+id/passenger_start"
+        android:layout_width="250dp"
+		android:layout_height="wrap_content"
+		android:minHeight="40dp"
+		android:layout_below="@id/passenger_start_title"
+		android:paddingLeft="3dp"
+		android:paddingRight="3dp"
+		android:gravity="left|center_vertical"
+		android:background="@drawable/dark_gray_border"
+		android:textCursorDrawable="@null"
+		style="@style/Style_Font_Large_White" />
+        
+    <TextView 
+        android:id="@+id/passenger_destination_title"
+        android:layout_width="wrap_content"
+		android:layout_height="45dp"
+		android:layout_below="@id/passenger_start"
+		android:gravity="center_vertical"
+		style="@style/Style_Font_Large_Black_Bold"
+		android:text="@string/destination_title" />
+    <EditText 
+        android:id="@+id/passenger_destination"
+        android:layout_width="250dp"
+		android:layout_height="wrap_content"
+		android:minHeight="40dp"
+		android:layout_below="@id/passenger_destination_title"
+		android:paddingLeft="3dp"
+		android:paddingRight="3dp"
+		android:gravity="left|center_vertical"
+		android:background="@drawable/dark_gray_border"
+		android:textCursorDrawable="@null"
+		style="@style/Style_Font_Large_White" />
+        
+    <Button 
+        android:id="@+id/send"
+        android:layout_width="180dp"
+		android:layout_height="40dp"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@id/passenger_destination"
+		android:layout_marginTop="20dp"
+		android:background="@drawable/btn_common"
+		style="@style/Style_Font_Large_Black_Bold"
+		android:text="@string/sms_send" />
+        
+</RelativeLayout>

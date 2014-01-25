@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- Words Size -->
+    <dimen name="large_word_size">30sp</dimen><!-- 20 -->
+
+</resources>

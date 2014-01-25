@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    
+    <!-- main menu -->
+    <string-array name="main_menu_array">
+        <item>首頁</item>
+        <item>電話叫車</item>
+        <item>簡訊叫車</item>
+        <item>Email叫車</item>
+        <item>line叫車</item>
+        <item>facebook粉絲團</item>
+        <item>部落格</item>
+    </string-array>
+    
+    <!-- passenger number -->
+    <string-array name="passenger_number_array">
+        <item>1人</item>
+        <item>2人</item>
+        <item>3人</item>
+        <item>4人</item>
+        <item>5人</item>
+        <item>6人</item>
+    </string-array>
+    
+</resources>

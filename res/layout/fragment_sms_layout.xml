@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange">
+    
+    <TextView 
+        android:id="@+id/sms_hint_title"
+        android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:layout_centerHorizontal="true"
+   		android:layout_marginTop="20dp"
+   		style="@style/Style_Font_Large_Black_Bold"
+   		android:text="@string/sms_hint_title" />
+    
+    <ScrollView 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_below="@id/sms_hint_title"
+    	android:layout_marginTop="20dp" >
+        
+        <include 
+            android:id="@+id/call_texi_layout"
+            android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+   			android:layout_gravity="center_horizontal"
+   			layout="@layout/call_taxi_form_layout" />
+        
+    </ScrollView>
+    
+</RelativeLayout>
