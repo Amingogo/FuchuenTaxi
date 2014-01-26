@@ -58,7 +58,7 @@
     		android:layout_below="@id/phone_driver_number"
     		android:layout_marginTop="20dp"
     		android:background="@drawable/btn_common"
-    		style="@style/Style_Font_Large_Black_Bold"
+    		style="@style/Style_Font_Large_White_Bold"
     		android:text="@string/phone_send" />
                 
     </RelativeLayout>

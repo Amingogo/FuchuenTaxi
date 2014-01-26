@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/orange">
+    
+    <TextView 
+        android:id="@+id/welcome_title"
+        android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:gravity="center"
+		style="@style/Style_Font_Large_Black_Bold"
+		android:text="@string/member_user_page_welcome" />
+
+    <Button 
+        android:id="@+id/logout"
+        android:layout_width="180dp"
+		android:layout_height="40dp"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@id/welcome_title"
+		android:layout_marginTop="10dp"
+		android:background="@drawable/btn_common"
+		style="@style/Style_Font_Large_White_Bold"
+		android:text="@string/member_user_logout" />
+    
+</RelativeLayout>

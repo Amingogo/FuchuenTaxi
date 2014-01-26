@@ -14,8 +14,13 @@ public class TaxiLocalConfig {
 	public static final String SHARED_PREFERENCE_TAXI_MINUTE = "tw.com.fuchuen.taxi.sharedpreference.minute";
 	public static final String SHARED_PREFERENCE_TAXI_START_PLACE = "tw.com.fuchuen.taxi.sharedpreference.startplace";
 	public static final String SHARED_PREFERENCE_TAXI_DESTINATION = "tw.com.fuchuen.taxi.sharedpreference.destination";
+	
+	public static final String SHARED_PREFERENCE_TAXI_SESSION_TOKEN = "tw.com.fuchuen.taxi.sharedpreference.session.token";
 
 	public static final String DATEPICKER_TAG = "datepicker";
 	public static final String TIMEPICKER_TAG = "timepicker";
+	
+	public static final String FRAGMENT_STACK_NAME = "tw.com.fuchuen.taxi.fragment.stack";
+	public static final String FRAGMENT_STACK_NAME_MAIN = "tw.com.fuchuen.taxi.fragment.stack.main";
 	
 }

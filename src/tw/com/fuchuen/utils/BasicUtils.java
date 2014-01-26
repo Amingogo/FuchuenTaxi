@@ -9,12 +9,28 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 public class BasicUtils {
+	public static boolean appInstalled(Context context, String uri) {
+		PackageManager pm = context.getPackageManager();
+		try{
+			pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+			return true;
+		}catch (PackageManager.NameNotFoundException e){
+			return false;
+		}
+	}
+	
 	public static Dialog getDialog(Context c, int res, String title) {
 		Dialog mDialog = null;
 		AlertDialog.Builder builder = new AlertDialog.Builder(c);
@@ -97,6 +113,58 @@ public class BasicUtils {
 	public static void saveTimeToSharedPreference(Context context, int hour, int minute) {
 		putSharedPreferencesValue(context, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_HOUR, hour);
 		putSharedPreferencesValue(context, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_MINUTE, minute);
+	}
+	
+	public static FragmentTransaction switchToFragment(Context mContext, Fragment fragment, Bundle args, int fromResource, boolean isAddStack, boolean needAnimation, int[] animationResources) {
+		FragmentManager fragmentManager=((FragmentActivity) mContext).getSupportFragmentManager();
+		FragmentTransaction ft = fragmentManager.beginTransaction();
+
+		if (needAnimation) {
+			ft.setCustomAnimations(animationResources[0], animationResources[1], animationResources[2], animationResources[3]);
+		}
+
+		if (isAddStack) {
+			ft.addToBackStack(TaxiLocalConfig.FRAGMENT_STACK_NAME);
+		}
+
+		ft.replace(fromResource, fragment, TaxiLocalConfig.FRAGMENT_STACK_NAME_MAIN);
+		
+		return ft;
+	}
+	
+	public static FragmentTransaction switchToFragment(Context mContext, Fragment fragment, Bundle args, int fromResource, boolean isAddStack, boolean needAnimation) {
+		int[] defaultAnimArr = new int[] { R.anim.enter_right, R.anim.leave_left, R.anim.enter_left, R.anim.leave_right };
+		return switchToFragment(mContext, fragment, args, fromResource, isAddStack, needAnimation,defaultAnimArr);
+	}
+	
+	public static FragmentTransaction switchToFragmentImmediately(Context mContext, Fragment fragment, Bundle args, int fromResource, boolean isAddStack, boolean needAnimation, int[] animationResources) {
+		FragmentManager fragmentManager=((FragmentActivity) mContext).getSupportFragmentManager();
+		FragmentTransaction ft = fragmentManager.beginTransaction();
+
+		if (needAnimation) {
+			ft.setCustomAnimations(animationResources[0], animationResources[1], animationResources[2], animationResources[3]);
+		}
+
+		if (isAddStack) {
+			ft.addToBackStack(TaxiLocalConfig.FRAGMENT_STACK_NAME);
+		}
+
+		ft.replace(fromResource, fragment, TaxiLocalConfig.FRAGMENT_STACK_NAME_MAIN);
+		
+		ft.commit();
+		fragmentManager.executePendingTransactions();
+
+		return ft;
+	}
+	
+	public static FragmentTransaction switchToFragmentImmediately(Context mContext, Fragment fragment, Bundle args, int fromResource, boolean isAddStack, boolean needAnimation) {
+		int[] defaultAnimArr = new int[] { R.anim.enter_right, R.anim.leave_left, R.anim.enter_left, R.anim.leave_right };
+		return switchToFragmentImmediately(mContext, fragment, args, fromResource, isAddStack, needAnimation,defaultAnimArr);
+	}
+	
+	public static void popFragment(Context mContext) {
+		FragmentManager fragmentManager=((FragmentActivity) mContext).getSupportFragmentManager();
+		fragmentManager.popBackStack();
 	}
 	
 	public static int[] getDateArray(Context context) {

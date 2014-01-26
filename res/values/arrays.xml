@@ -3,7 +3,8 @@
     
     <!-- main menu -->
     <string-array name="main_menu_array">
-        <item>首頁</item>
+        <item>最新消息</item>
+        <item>會員專區</item>
         <item>電話叫車</item>
         <item>簡訊叫車</item>
         <item>Email叫車</item>

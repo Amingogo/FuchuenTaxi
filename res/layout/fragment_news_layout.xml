@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange">
+
+	<tw.com.amingo.library.customview.BannerViewPager 
+	    android:id="@+id/banner_viewpager_layout"
+   		android:layout_width="match_parent"
+  	 	android:layout_height="270dp" />
+	
+	<ScrollView 
+	    android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_below="@id/banner_viewpager_layout" >
+	    
+	    <LinearLayout
+	        android:id="@+id/news_layout"
+	        android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:orientation="vertical" >
+	        
+	    </LinearLayout>
+	    
+	</ScrollView>
+    
+</RelativeLayout>

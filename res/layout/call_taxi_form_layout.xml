@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
    	android:layout_height="wrap_content"
-   	android:padding="5dp"
-   	android:background="@drawable/black_border" >
+   	android:padding="5dp" >
         
     <TextView 
         android:id="@+id/passenger_name_title"
@@ -14,7 +13,7 @@
 		android:text="@string/name_title" />
     <EditText 
         android:id="@+id/passenger_name"
-        android:layout_width="190dp"
+        android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:minHeight="40dp"
 		android:layout_toRightOf="@id/passenger_name_title"
@@ -84,7 +83,7 @@
 		android:text="@string/start_title" />
     <EditText 
         android:id="@+id/passenger_start"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:minHeight="40dp"
 		android:layout_below="@id/passenger_start_title"
@@ -105,7 +104,7 @@
 		android:text="@string/destination_title" />
     <EditText 
         android:id="@+id/passenger_destination"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:minHeight="40dp"
 		android:layout_below="@id/passenger_destination_title"
@@ -124,7 +123,7 @@
 		android:layout_below="@id/passenger_destination"
 		android:layout_marginTop="20dp"
 		android:background="@drawable/btn_common"
-		style="@style/Style_Font_Large_Black_Bold"
+		style="@style/Style_Font_Large_White_Bold"
 		android:text="@string/sms_send" />
         
 </RelativeLayout>

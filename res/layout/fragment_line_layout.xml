@@ -1,16 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/yellow">
-
-	<Button 
-	    android:id="@+id/addLineBtn"
+    android:background="@color/orange">
+    
+    <TextView 
+        android:id="@+id/line_hint_title"
+        android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:layout_centerHorizontal="true"
+   		android:layout_marginTop="20dp"
+   		style="@style/Style_Font_Large_Black_Bold"
+   		android:text="@string/line_hint_title" />
+    
+    <TextView 
+        android:id="@+id/line_add_friend_title"
+        android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:layout_centerHorizontal="true"
+   		android:layout_below="@id/line_hint_title"
+   		style="@style/Style_Font_Small_Black_Bold"
+   		android:textColor="@color/red"
+   		android:text="@string/line_add_friend_hint" />
+    <Button 
+	    android:id="@+id/line_add_friend_button"
 	    android:layout_width="120dp"
     	android:layout_height="40dp"
-    	android:layout_centerInParent="true"
+    	android:layout_centerHorizontal="true"
+    	android:layout_below="@id/line_add_friend_title"
+    	android:layout_marginTop="5dp"
+    	android:background="@drawable/btn_common"
     	style="@style/Style_Font_Medium_White_Bold"
-    	android:text="@string/line_button_title" />
+    	android:text="@string/line_add_friend_button_title" />
+    
+    <ScrollView 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_below="@id/line_add_friend_button"
+    	android:layout_marginTop="20dp" >
+        
+        <include 
+            android:id="@+id/call_texi_layout"
+            android:layout_width="310dp"
+   			android:layout_height="wrap_content"
+   			android:layout_gravity="center_horizontal"
+   			layout="@layout/call_taxi_form_layout" />
+        
+    </ScrollView>
     
 </RelativeLayout>
