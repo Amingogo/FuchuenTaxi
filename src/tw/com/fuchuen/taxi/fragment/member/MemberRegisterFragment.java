@@ -1,6 +1,7 @@
 package tw.com.fuchuen.taxi.fragment.member;
 
 import tw.com.fuchuen.taxi.R;
+import tw.com.fuchuen.taxi.config.TaxiApiConfig;
 import tw.com.fuchuen.utils.BasicUtils;
 import android.content.Context;
 import android.os.Bundle;
@@ -24,9 +25,9 @@ public class MemberRegisterFragment extends Fragment {
 	
 	private EditText mUserNameEditText;
 	private EditText mUserPasswordEditText;
+	private EditText mUserPasswordConfirmEditText;
+	private EditText mUserAccountEditText;
 	private Button mRegisterButton;
-	
-	private View mProgressLayout;
 
 	
 	public static Fragment newInstance() {
@@ -42,9 +43,7 @@ public class MemberRegisterFragment extends Fragment {
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mContext = inflater.getContext();
-		mMainView = inflater.inflate(R.layout.fragment_member_layout, null, false);
-		mProgressLayout = mMainView.findViewById(R.id.progress_bar_layout);
-		mProgressLayout.setVisibility(View.GONE);
+		mMainView = inflater.inflate(R.layout.fragment_member_register_layout, null, false);
 		return mMainView;
 	}
 	
@@ -60,22 +59,31 @@ public class MemberRegisterFragment extends Fragment {
 	}
 	
 	private void setupRegisterLayout() {
-		mMainView.findViewById(R.id.register).setVisibility(View.GONE);
 		mUserNameEditText = (EditText)mMainView.findViewById(R.id.user_name);
 		mUserPasswordEditText = (EditText)mMainView.findViewById(R.id.user_password);
+		mUserPasswordConfirmEditText = (EditText)mMainView.findViewById(R.id.user_password_confirm);
+		mUserAccountEditText = (EditText)mMainView.findViewById(R.id.user_account);
 		mRegisterButton = (Button)mMainView.findViewById(R.id.send);
 		mRegisterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String userName = mUserNameEditText.getText().toString();
 				String userPassword = mUserPasswordEditText.getText().toString();
-				if(userName.equals("") || userPassword.equals("")) {
+				String userConfirmPassword = mUserPasswordConfirmEditText.getText().toString();
+				String userAccount = mUserAccountEditText.getText().toString();
+				if(userName.equals("") || userPassword.equals("") || userConfirmPassword.equals("") || userAccount.equals("")) {
 					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_leak_info));
+					return;
+				}
+				if(!userPassword.equals(userConfirmPassword)) {
+					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_password_incorrect));
 					return;
 				}
 				ParseUser user = new ParseUser();
 				user.setUsername(mUserNameEditText.getText().toString());
 				user.setPassword(mUserPasswordEditText.getText().toString());
+				user.put(TaxiApiConfig.USER_ACCOUNT, userAccount);
+				user.put(TaxiApiConfig.USER_TAKE_COUNT, "0");
 				user.signUpInBackground(new SignUpCallback() {
 					public void done(ParseException e) {
 					    if (e == null) {

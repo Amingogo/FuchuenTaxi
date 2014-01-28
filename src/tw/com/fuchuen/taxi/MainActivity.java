@@ -1,5 +1,8 @@
 package tw.com.fuchuen.taxi;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tw.com.fuchuen.taxi.fragment.EmailFragment;
 import tw.com.fuchuen.taxi.fragment.LineFragment;
 import tw.com.fuchuen.taxi.fragment.NewsFragment;
@@ -8,6 +11,8 @@ import tw.com.fuchuen.taxi.fragment.SMSFragment;
 import tw.com.fuchuen.taxi.fragment.WebViewFragment;
 import tw.com.fuchuen.taxi.fragment.WebViewWithControlFragment;
 import tw.com.fuchuen.taxi.fragment.member.MemberLoginFragment;
+import tw.com.fuchuen.taxi.model.BannerImage;
+import tw.com.fuchuen.taxi.model.NewsItem;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -37,6 +42,10 @@ public class MainActivity extends SherlockFragmentActivity {
 	private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mFragmentTitles;
+    
+    private List<BannerImage> mBannerImageList;
+    private List<NewsItem> mNewsList;
+    
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,10 @@ public class MainActivity extends SherlockFragmentActivity {
 		
 		setupActiobBar();
 		setupDrawer();
+		
+		mBannerImageList = new ArrayList<BannerImage>();
+		mNewsList = new ArrayList<NewsItem>();
+		
 		initFragment();
 		
 		Parse.initialize(this, "Sh07WHQA9rLHMk5LNuz5fKB9SmKdvmJZ0g5nZlWE", "SM6FUVvTnsszaVnuKiYU2mr8ClQTfv4qSIOGXHKD");
@@ -200,6 +213,22 @@ public class MainActivity extends SherlockFragmentActivity {
 			default:
 				break;
 		}
+	}
+
+	public List<BannerImage> getBannerImageList() {
+		return mBannerImageList;
+	}
+
+	public void setBannerImageList(List<BannerImage> mBannerImageList) {
+		this.mBannerImageList = mBannerImageList;
+	}
+
+	public List<NewsItem> getNewsList() {
+		return mNewsList;
+	}
+
+	public void setNewsList(List<NewsItem> mNewsList) {
+		this.mNewsList = mNewsList;
 	}
 
 }

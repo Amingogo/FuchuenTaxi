@@ -1,10 +1,12 @@
 package tw.com.fuchuen.taxi.fragment;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import tw.com.amingo.library.customview.BannerAdapter;
 import tw.com.amingo.library.customview.BannerViewPager;
+import tw.com.fuchuen.taxi.MainActivity;
 import tw.com.fuchuen.taxi.R;
 import tw.com.fuchuen.taxi.model.BannerImage;
 import tw.com.fuchuen.taxi.model.NewsItem;
@@ -17,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,12 +35,12 @@ public class NewsFragment extends Fragment {
 	
 	private View mMainView;
 	
+	private MainActivity mMainActivity;
+	
 	private BannerViewPager mBannerViewPager;
 	private BannerAdapter mBannerAdapter;
-	private List<BannerImage> mBannerImageList;
 	
 	private LinearLayout mNewsLinearLayout;
-	private List<NewsItem> mNewsList;
 	
 	
 	public static Fragment newInstance() {
@@ -48,14 +51,13 @@ public class NewsFragment extends Fragment {
 	@Override
 	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mBannerImageList = new ArrayList<BannerImage>();
-		mNewsList = new ArrayList<NewsItem>();
 	}
 
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mLayoutInflater = inflater;
 		mContext = inflater.getContext();
+		mMainActivity = (MainActivity) getActivity();
 		mMainView = inflater.inflate(R.layout.fragment_news_layout, null, false);
 		getImageData();
 		getNewsData();
@@ -75,7 +77,7 @@ public class NewsFragment extends Fragment {
 	}
 	
 	private void getImageData() {
-		if(mBannerImageList.size() == 0) {
+		if(mMainActivity.getBannerImageList().size() == 0) {
 			ParseQuery<ParseObject> query = ParseQuery.getQuery("GalleryImages");
 			query.findInBackground(new FindCallback<ParseObject>() {
 				@Override
@@ -85,7 +87,7 @@ public class NewsFragment extends Fragment {
 							UtilsLog.logDebug(NewsFragment.class, "URL:"+parseObjectList.get(i).getString("imageLink"));
 							BannerImage bannerImage = new BannerImage();
 							bannerImage.BannerURL = parseObjectList.get(i).getString("imageLink");
-							mBannerImageList.add(bannerImage);
+							mMainActivity.getBannerImageList().add(bannerImage);
 						}
 						setupBanner();
 					} else {
@@ -99,7 +101,7 @@ public class NewsFragment extends Fragment {
 	}
 	
 	private void setupBanner() {
-		mBannerAdapter = new BannerAdapter(mContext, mBannerImageList);
+		mBannerAdapter = new BannerAdapter(mContext, mMainActivity.getBannerImageList());
 		mBannerViewPager = (BannerViewPager)mMainView.findViewById(R.id.banner_viewpager_layout);
 		mBannerViewPager.setFragmentPagerAdapter(mBannerAdapter);
 		mBannerViewPager.startAutoChangeImage(5000);
@@ -107,7 +109,7 @@ public class NewsFragment extends Fragment {
 	
 	private void getNewsData() {
 		mNewsLinearLayout = (LinearLayout)mMainView.findViewById(R.id.news_layout);
-		if(mNewsList.size() == 0) {
+		if(mMainActivity.getNewsList().size() == 0) {
 			ParseQuery<ParseObject> query = ParseQuery.getQuery("News");
 			query.findInBackground(new FindCallback<ParseObject>() {
 				@Override
@@ -119,7 +121,7 @@ public class NewsFragment extends Fragment {
 							newsItem.updateDate = parseObjectList.get(i).getString("updateDate");
 							newsItem.index = parseObjectList.get(i).getString("index");
 							newsItem.content = parseObjectList.get(i).getString("content");
-							mNewsList.add(newsItem);
+							mMainActivity.getNewsList().add(newsItem);
 						}
 						setupNewsItem();
 					} else {
@@ -133,7 +135,8 @@ public class NewsFragment extends Fragment {
 	}
 	
 	private void setupNewsItem() {
-		for(NewsItem newsItem : mNewsList) {
+		Collections.sort(mMainActivity.getNewsList(), new NewsItemComparator());
+		for(NewsItem newsItem : mMainActivity.getNewsList()) {
 			RelativeLayout newsItemLayout = (RelativeLayout)mLayoutInflater.inflate(R.layout.news_item_layout, null);
 //			TextView updateDateTextView = (TextView)newsItemLayout.findViewById(R.id.news_item_update_date);
 			TextView indexTextView = (TextView)newsItemLayout.findViewById(R.id.news_item_index);
@@ -143,8 +146,17 @@ public class NewsFragment extends Fragment {
 			indexTextView.setText(newsItem.index+".");
 			contentTextView.setText(newsItem.content);
 
-			mNewsLinearLayout.addView(newsItemLayout);
+			LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			layoutParams.setMargins(10, 10, 10, 10);
+			mNewsLinearLayout.addView(newsItemLayout,layoutParams);
 		}
+	}
+	
+	public class NewsItemComparator implements Comparator<NewsItem> {
+	    @Override
+	    public int compare(NewsItem o1, NewsItem o2) {
+	        return o1.index.compareTo(o2.index);
+	    }
 	}
 	
 }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/orange">
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent">
+        
+        <TextView 
+	        android:id="@+id/user_name_title"
+	        android:layout_width="wrap_content"
+			android:layout_height="40dp"
+			android:gravity="center_vertical"
+			style="@style/Style_Font_Large_Black_Bold"
+			android:text="@string/member_user_name_title" />
+	    <EditText 
+	        android:id="@+id/user_name"
+	        android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="40dp"
+			android:layout_below="@id/user_name_title"
+			android:paddingLeft="3dp"
+			android:paddingRight="3dp"
+			android:gravity="left|center_vertical"
+			android:background="@drawable/dark_gray_border"
+			android:textCursorDrawable="@null"
+			android:inputType="phone"
+			style="@style/Style_Font_Large_White" />
+	    
+	    <TextView 
+	        android:id="@+id/user_password_title"
+	        android:layout_width="wrap_content"
+			android:layout_height="40dp"
+			android:layout_below="@id/user_name"
+			android:gravity="center_vertical"
+			style="@style/Style_Font_Large_Black_Bold"
+			android:text="@string/member_user_password_title" />
+	    <EditText 
+	        android:id="@+id/user_password"
+	        android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="40dp"
+			android:layout_below="@id/user_password_title"
+			android:paddingLeft="3dp"
+			android:paddingRight="3dp"
+			android:gravity="left|center_vertical"
+			android:background="@drawable/dark_gray_border"
+			android:textCursorDrawable="@null"
+			android:inputType="textPassword"
+			style="@style/Style_Font_Large_White" />
+	    
+	    <TextView 
+	        android:id="@+id/user_password_confirm_title"
+	        android:layout_width="wrap_content"
+			android:layout_height="40dp"
+			android:layout_below="@id/user_password"
+			android:gravity="center_vertical"
+			style="@style/Style_Font_Large_Black_Bold"
+			android:text="@string/member_user_password_confirm_title" />
+	    <EditText 
+	        android:id="@+id/user_password_confirm"
+	        android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="40dp"
+			android:layout_below="@id/user_password_confirm_title"
+			android:paddingLeft="3dp"
+			android:paddingRight="3dp"
+			android:gravity="left|center_vertical"
+			android:background="@drawable/dark_gray_border"
+			android:textCursorDrawable="@null"
+			android:inputType="textPassword"
+			style="@style/Style_Font_Large_White" />
+	    
+	    <TextView 
+	        android:id="@+id/user_account_title"
+	        android:layout_width="wrap_content"
+			android:layout_height="40dp"
+			android:layout_below="@id/user_password_confirm"
+			android:gravity="center_vertical"
+			style="@style/Style_Font_Large_Black_Bold"
+			android:text="@string/member_user_account_title" />
+	    <EditText 
+	        android:id="@+id/user_account"
+	        android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="40dp"
+			android:layout_below="@id/user_account_title"
+			android:paddingLeft="3dp"
+			android:paddingRight="3dp"
+			android:gravity="left|center_vertical"
+			android:background="@drawable/dark_gray_border"
+			android:textCursorDrawable="@null"
+			android:inputType="text"
+			style="@style/Style_Font_Large_White" />
+	    
+	    <Button 
+	        android:id="@+id/send"
+	        android:layout_width="180dp"
+			android:layout_height="40dp"
+			android:layout_centerHorizontal="true"
+			android:layout_below="@id/user_account"
+			android:layout_marginTop="50dp"
+			android:background="@drawable/btn_common"
+			style="@style/Style_Font_Large_White_Bold"
+			android:text="@string/member_user_register" />
+        
+    </RelativeLayout>
+    
+</RelativeLayout>

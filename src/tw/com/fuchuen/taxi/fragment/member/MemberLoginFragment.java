@@ -45,7 +45,7 @@ public class MemberLoginFragment extends Fragment {
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mContext = inflater.getContext();
-		mMainView = inflater.inflate(R.layout.fragment_member_layout, null, false);
+		mMainView = inflater.inflate(R.layout.fragment_member_login_layout, null, false);
 		mProgressLayout = mMainView.findViewById(R.id.progress_bar_layout);
 		return mMainView;
 	}
@@ -74,7 +74,7 @@ public class MemberLoginFragment extends Fragment {
 				String userName = mUserNameEditText.getText().toString();
 				String userPassword = mUserPasswordEditText.getText().toString();
 				if(userName.equals("") || userPassword.equals("")) {
-					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_leak_info));
+					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_login_leak_info));
 					return;
 				}
 				ParseUser.logInInBackground(userName, userPassword, new LogInCallback() {
@@ -102,7 +102,7 @@ public class MemberLoginFragment extends Fragment {
 		mRegisterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BasicUtils.switchToFragmentImmediately(mContext, MemberRegisterFragment.newInstance(), null, R.id.content_frame, true, false);
+				BasicUtils.switchToFragmentImmediately(mContext, MemberRegisterFragment.newInstance(), null, R.id.content_frame, true, true);
 			}
 		});
 	}

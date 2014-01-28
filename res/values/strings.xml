@@ -44,15 +44,21 @@
     <!-- Member -->
     <string name="member_user_name_title">帳號(電話號碼)</string>
     <string name="member_user_password_title">密碼</string>
+    <string name="member_user_password_confirm_title">確認密碼</string>
+    <string name="member_user_account_title">姓名</string>
     <string name="member_user_register">註冊</string>
     <string name="member_user_login">登入</string>
-    <string name="member_user_register_leak_info">請輸入帳號密碼</string>
+    <string name="member_user_login_leak_info">請輸入帳號密碼</string>
+    <string name="member_user_register_leak_info">資料皆為必填，請填寫完整再送出，謝謝您的配合。</string>
+    <string name="member_user_register_password_incorrect">密碼與確認密碼欄位輸入不符，請再次確認，謝謝。</string>
     <string name="member_user_register_success">註冊成功</string>
     <string name="member_user_register_user_name_taken">帳號已被註冊</string>
     <string name="member_user_register_fail">註冊失敗</string>
     <string name="member_user_login_username_or_password_error">帳號或密碼錯誤</string>
     <string name="member_user_login_success">登入成功</string>
     <string name="member_user_page_welcome">%1$s您好，祝您一切順心！</string>
+    <string name="member_user_take_count_title">目前您的點數</string>
+    <string name="member_user_take_count_zero_title">無點數</string>
     <string name="member_user_logout">登出</string>
     
     <!-- phone -->
