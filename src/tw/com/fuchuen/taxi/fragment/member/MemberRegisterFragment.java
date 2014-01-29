@@ -67,6 +67,10 @@ public class MemberRegisterFragment extends Fragment {
 		mRegisterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(!BasicUtils.haveNetworkConnection(mContext)) {
+					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.register_no_network));
+					return;
+				}
 				String userName = mUserNameEditText.getText().toString();
 				String userPassword = mUserPasswordEditText.getText().toString();
 				String userConfirmPassword = mUserPasswordConfirmEditText.getText().toString();

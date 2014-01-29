@@ -12,7 +12,9 @@ import tw.com.fuchuen.taxi.fragment.WebViewFragment;
 import tw.com.fuchuen.taxi.fragment.WebViewWithControlFragment;
 import tw.com.fuchuen.taxi.fragment.member.MemberLoginFragment;
 import tw.com.fuchuen.taxi.model.BannerImage;
+import tw.com.fuchuen.taxi.model.BannerImageList;
 import tw.com.fuchuen.taxi.model.NewsItem;
+import tw.com.fuchuen.taxi.model.NewsItemList;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -43,8 +45,8 @@ public class MainActivity extends SherlockFragmentActivity {
     private CharSequence mTitle;
     private String[] mFragmentTitles;
     
-    private List<BannerImage> mBannerImageList;
-    private List<NewsItem> mNewsList;
+    private BannerImageList mBannerImageList;
+    private NewsItemList mNewsList;
     
 	
 	@Override
@@ -55,8 +57,10 @@ public class MainActivity extends SherlockFragmentActivity {
 		setupActiobBar();
 		setupDrawer();
 		
-		mBannerImageList = new ArrayList<BannerImage>();
-		mNewsList = new ArrayList<NewsItem>();
+		mBannerImageList = new BannerImageList();
+		mBannerImageList.dataList = new ArrayList<BannerImage>();
+		mNewsList = new NewsItemList();
+		mNewsList.dataList = new ArrayList<NewsItem>();
 		
 		initFragment();
 		
@@ -215,20 +219,20 @@ public class MainActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	public List<BannerImage> getBannerImageList() {
+	public BannerImageList getBannerImageList() {
 		return mBannerImageList;
 	}
 
 	public void setBannerImageList(List<BannerImage> mBannerImageList) {
-		this.mBannerImageList = mBannerImageList;
+		this.mBannerImageList.dataList = mBannerImageList;
 	}
 
-	public List<NewsItem> getNewsList() {
+	public NewsItemList getNewsList() {
 		return mNewsList;
 	}
 
 	public void setNewsList(List<NewsItem> mNewsList) {
-		this.mNewsList = mNewsList;
+		this.mNewsList.dataList = mNewsList;
 	}
 
 }

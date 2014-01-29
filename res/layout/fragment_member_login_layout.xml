@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@color/orange">
+    android:background="@color/app_background">
     
     <RelativeLayout 
         android:layout_width="match_parent"
@@ -80,7 +80,7 @@
         android:id="@+id/progress_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/orange" >
+        android:background="@color/app_background" >
 
         <ProgressBar
             android:id="@+id/progress_bar"

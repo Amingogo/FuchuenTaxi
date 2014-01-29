@@ -71,6 +71,10 @@ public class MemberLoginFragment extends Fragment {
 		mLoginButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(!BasicUtils.haveNetworkConnection(mContext)) {
+					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.login_no_network));
+					return;
+				}
 				String userName = mUserNameEditText.getText().toString();
 				String userPassword = mUserPasswordEditText.getText().toString();
 				if(userName.equals("") || userPassword.equals("")) {
@@ -113,6 +117,11 @@ public class MemberLoginFragment extends Fragment {
 		if(sessionToken.equals("")) {
 			mProgressLayout.setVisibility(View.GONE);
 		} else {
+			if(!BasicUtils.haveNetworkConnection(mContext)) {
+				BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.login_no_network));
+				mProgressLayout.setVisibility(View.GONE);
+				return;
+			}
 			ParseUser.becomeInBackground(sessionToken, new LogInCallback() {
 				@Override
 				public void done(ParseUser user, ParseException e) {

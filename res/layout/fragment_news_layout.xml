@@ -2,17 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange">
+    android:background="@color/app_background">
 
 	<tw.com.amingo.library.customview.BannerViewPager 
 	    android:id="@+id/banner_viewpager_layout"
    		android:layout_width="match_parent"
   	 	android:layout_height="270dp" />
+	<View 
+	    android:layout_width="match_parent"
+  	 	android:layout_height="270dp"
+  	 	android:background="@drawable/bkg_banner" />
 	
 	<ScrollView 
 	    android:layout_width="match_parent"
     	android:layout_height="match_parent"
-    	android:layout_below="@id/banner_viewpager_layout" >
+    	android:layout_below="@id/banner_viewpager_layout"
+    	android:layout_marginTop="10dp" >
 	    
 	    <LinearLayout
 	        android:id="@+id/news_layout"

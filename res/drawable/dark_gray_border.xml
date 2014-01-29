@@ -7,10 +7,10 @@
 		android:startColor="@color/darkGray"
 		android:endColor="@color/darkGray" />
 	<corners
-		android:bottomRightRadius="5dp" 
-		android:bottomLeftRadius="5dp" 
-		android:topLeftRadius="5dp" 
-		android:topRightRadius="5dp" 
+		android:bottomRightRadius="2dp" 
+		android:bottomLeftRadius="2dp" 
+		android:topLeftRadius="2dp" 
+		android:topRightRadius="2dp" 
 		android:background="@color/darkGray" />
 	<stroke
 		android:color="@color/darkGray"

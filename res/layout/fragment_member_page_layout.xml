@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@color/orange">
+    android:background="@color/app_background">
     
     <TextView 
         android:id="@+id/welcome_title"
@@ -13,10 +13,21 @@
 		style="@style/Style_Font_Large_Black_Bold" />
 
     <TextView 
-        android:id="@+id/user_take_count_title"
+        android:id="@+id/user_take_count_hint_title"
         android:layout_width="match_parent"
 		android:layout_height="40dp"
 		android:layout_below="@+id/welcome_title"
+		android:gravity="center"
+		style="@style/Style_Font_Medium_Black_Bold"
+		android:textSize="14sp"
+		android:textColor="@color/red"
+		android:text="@string/member_user_take_count_hint_title" />
+    
+    <TextView 
+        android:id="@+id/user_take_count_title"
+        android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:layout_below="@+id/user_take_count_hint_title"
 		android:gravity="center"
 		style="@style/Style_Font_Large_Black_Bold"
 		android:text="@string/member_user_take_count_title" />

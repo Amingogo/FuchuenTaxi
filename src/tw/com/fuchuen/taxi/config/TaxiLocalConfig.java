@@ -16,7 +16,10 @@ public class TaxiLocalConfig {
 	public static final String SHARED_PREFERENCE_TAXI_DESTINATION = "tw.com.fuchuen.taxi.sharedpreference.destination";
 	
 	public static final String SHARED_PREFERENCE_TAXI_SESSION_TOKEN = "tw.com.fuchuen.taxi.sharedpreference.session.token";
-
+	
+	public static final String SHARED_PREFERENCE_TAXI_CACHE_IMAGES = "tw.com.fuchuen.taxi.sharedpreference.cache.images";
+	public static final String SHARED_PREFERENCE_TAXI_CACHE_NEWS = "tw.com.fuchuen.taxi.sharedpreference.cache.news";
+	
 	public static final String DATEPICKER_TAG = "datepicker";
 	public static final String TIMEPICKER_TAG = "timepicker";
 	

@@ -20,6 +20,9 @@
     <string name="drawer_close">關閉選單</string>
     
     <string name="fetch_data_fail">伺服器忙碌，請稍候再試，謝謝。</string>
+    <string name="fetch_data_no_network">未連接網路，無法取得資料。</string>
+    <string name="login_no_network">未連接網路，無法登入。</string>
+    <string name="register_no_network">未連接網路，無法註冊。</string>
     
     <!-- opening -->
     <string name="opening_title">歡迎使用呂福春個人車行叫車APP</string>
@@ -58,6 +61,7 @@
     <string name="member_user_login_success">登入成功</string>
     <string name="member_user_page_welcome">%1$s您好，祝您一切順心！</string>
     <string name="member_user_take_count_title">目前您的點數</string>
+    <string name="member_user_take_count_hint_title">集滿10點可於下次搭乘兌換免費前往桃園機場乙次</string>
     <string name="member_user_take_count_zero_title">無點數</string>
     <string name="member_user_logout">登出</string>
     

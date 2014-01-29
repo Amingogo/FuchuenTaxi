@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:padding="5dp"
-	android:background="@drawable/black_border" >
+	android:background="@drawable/black_fill" >
     
 <!--     <TextView
 	    android:id="@+id/news_item_update_date"
@@ -14,12 +14,12 @@
 	    android:id="@+id/news_item_index"
 	    android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		style="@style/Style_Font_Large_Black_Bold" />
+		style="@style/Style_Font_Large_White" />
     <TextView
 	    android:id="@+id/news_item_content"
 	    android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_toRightOf="@id/news_item_index"
-		style="@style/Style_Font_Large_Black_Bold" />
+		style="@style/Style_Font_Large_White" />
     
 </RelativeLayout>

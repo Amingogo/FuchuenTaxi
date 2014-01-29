@@ -35,7 +35,7 @@
    		android:text="@string/people_title" />
     <Spinner
 	    android:id="@+id/passenger_count_spinner"
-	    android:layout_width="100dp"
+	    android:layout_width="215dp"
 	    android:layout_height="45dp"
 	    android:layout_below="@id/passenger_name"
 	    android:layout_toRightOf="@id/passenger_count_title"
@@ -52,7 +52,7 @@
 		android:text="@string/time_title" />
     <TextView 
         android:id="@+id/take_taxi_date"
-        android:layout_width="150dp"
+        android:layout_width="210dp"
 		android:layout_height="40dp"
 		android:layout_below="@id/passenger_count_spinner"
 		android:layout_toRightOf="@id/passenger_date_time_title"
@@ -63,7 +63,7 @@
 		android:text="@string/date_hint" />
     <TextView 
         android:id="@+id/take_taxi_time"
-        android:layout_width="150dp"
+        android:layout_width="210dp"
 		android:layout_height="40dp"
 		android:layout_below="@id/take_taxi_date"
 		android:layout_alignLeft="@id/take_taxi_date"

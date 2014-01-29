@@ -8,8 +8,11 @@ import tw.com.amingo.library.customview.BannerAdapter;
 import tw.com.amingo.library.customview.BannerViewPager;
 import tw.com.fuchuen.taxi.MainActivity;
 import tw.com.fuchuen.taxi.R;
+import tw.com.fuchuen.taxi.config.TaxiLocalConfig;
 import tw.com.fuchuen.taxi.model.BannerImage;
+import tw.com.fuchuen.taxi.model.BannerImageList;
 import tw.com.fuchuen.taxi.model.NewsItem;
+import tw.com.fuchuen.taxi.model.NewsItemList;
 import tw.com.fuchuen.utils.BasicUtils;
 import tw.com.fuchuen.utils.UtilsLog;
 import android.content.Context;
@@ -23,6 +26,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -77,31 +81,44 @@ public class NewsFragment extends Fragment {
 	}
 	
 	private void getImageData() {
-		if(mMainActivity.getBannerImageList().size() == 0) {
-			ParseQuery<ParseObject> query = ParseQuery.getQuery("GalleryImages");
-			query.findInBackground(new FindCallback<ParseObject>() {
-				@Override
-				public void done(List<ParseObject> parseObjectList, ParseException parseException) {
-					if(parseException == null) {
-						for(int i = 0;i < parseObjectList.size();i++) {
-							UtilsLog.logDebug(NewsFragment.class, "URL:"+parseObjectList.get(i).getString("imageLink"));
-							BannerImage bannerImage = new BannerImage();
-							bannerImage.BannerURL = parseObjectList.get(i).getString("imageLink");
-							mMainActivity.getBannerImageList().add(bannerImage);
+		if(BasicUtils.haveNetworkConnection(mContext)) {
+			if(mMainActivity.getBannerImageList().dataList.size() == 0) {
+				ParseQuery<ParseObject> query = ParseQuery.getQuery("GalleryImages");
+				query.findInBackground(new FindCallback<ParseObject>() {
+					@Override
+					public void done(List<ParseObject> parseObjectList, ParseException parseException) {
+						if(parseException == null) {
+							for(int i = 0;i < parseObjectList.size();i++) {
+								UtilsLog.logDebug(NewsFragment.class, "URL:"+parseObjectList.get(i).getString("imageLink"));
+								BannerImage bannerImage = new BannerImage();
+								bannerImage.BannerURL = parseObjectList.get(i).getString("imageLink");
+								mMainActivity.getBannerImageList().dataList.add(bannerImage);
+							}
+							BasicUtils.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_IMAGES, new Gson().toJson(mMainActivity.getBannerImageList()));
+							setupBanner();
+						} else {
+							String imageListString = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_IMAGES, null);
+							if(imageListString == null || imageListString.equals("")) BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_fail));
+							BannerImageList bannerImageList = new Gson().fromJson(imageListString, BannerImageList.class);
+							mMainActivity.setBannerImageList(bannerImageList.dataList);
+							setupBanner();
 						}
-						setupBanner();
-					} else {
-						BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_fail));
 					}
-				}
-			});
-			return;
+				});
+				return;
+			}
+			setupBanner();
+		} else {
+			String imageListString = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_IMAGES, null);
+			if(imageListString == null || imageListString.equals("")) BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_no_network));
+			BannerImageList bannerImageList = new Gson().fromJson(imageListString, BannerImageList.class);
+			mMainActivity.setBannerImageList(bannerImageList.dataList);
+			setupBanner();
 		}
-		setupBanner();
 	}
 	
 	private void setupBanner() {
-		mBannerAdapter = new BannerAdapter(mContext, mMainActivity.getBannerImageList());
+		mBannerAdapter = new BannerAdapter(mContext, mMainActivity.getBannerImageList().dataList);
 		mBannerViewPager = (BannerViewPager)mMainView.findViewById(R.id.banner_viewpager_layout);
 		mBannerViewPager.setFragmentPagerAdapter(mBannerAdapter);
 		mBannerViewPager.startAutoChangeImage(5000);
@@ -109,34 +126,47 @@ public class NewsFragment extends Fragment {
 	
 	private void getNewsData() {
 		mNewsLinearLayout = (LinearLayout)mMainView.findViewById(R.id.news_layout);
-		if(mMainActivity.getNewsList().size() == 0) {
-			ParseQuery<ParseObject> query = ParseQuery.getQuery("News");
-			query.findInBackground(new FindCallback<ParseObject>() {
-				@Override
-				public void done(List<ParseObject> parseObjectList, ParseException parseException) {
-					if(parseException == null) {
-						for(int i = 0;i < parseObjectList.size();i++) {
-							UtilsLog.logDebug(NewsFragment.class, "index:"+parseObjectList.get(i).getString("index")+" updateDate:"+parseObjectList.get(i).getString("updateDate")+" content:"+parseObjectList.get(i).getString("content"));
-							NewsItem newsItem = new NewsItem();
-							newsItem.updateDate = parseObjectList.get(i).getString("updateDate");
-							newsItem.index = parseObjectList.get(i).getString("index");
-							newsItem.content = parseObjectList.get(i).getString("content");
-							mMainActivity.getNewsList().add(newsItem);
+		if(BasicUtils.haveNetworkConnection(mContext)) {
+			if(mMainActivity.getNewsList().dataList.size() == 0) {
+				ParseQuery<ParseObject> query = ParseQuery.getQuery("News");
+				query.findInBackground(new FindCallback<ParseObject>() {
+					@Override
+					public void done(List<ParseObject> parseObjectList, ParseException parseException) {
+						if(parseException == null) {
+							for(int i = 0;i < parseObjectList.size();i++) {
+								UtilsLog.logDebug(NewsFragment.class, "index:"+parseObjectList.get(i).getString("index")+" updateDate:"+parseObjectList.get(i).getString("updateDate")+" content:"+parseObjectList.get(i).getString("content"));
+								NewsItem newsItem = new NewsItem();
+								newsItem.updateDate = parseObjectList.get(i).getString("updateDate");
+								newsItem.index = parseObjectList.get(i).getString("index");
+								newsItem.content = parseObjectList.get(i).getString("content");
+								mMainActivity.getNewsList().dataList.add(newsItem);
+							}
+							BasicUtils.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_NEWS, new Gson().toJson(mMainActivity.getNewsList()));
+							setupNewsItem();
+						} else {
+							String newsListString = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_NEWS, null);
+							if(newsListString == null || newsListString.equals("")) BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_no_network));
+							NewsItemList newsItemList = new Gson().fromJson(newsListString, NewsItemList.class);
+							mMainActivity.setNewsList(newsItemList.dataList);
+							setupNewsItem();
 						}
-						setupNewsItem();
-					} else {
-						BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_fail));
 					}
-				}
-			});
-			return;
+				});
+				return;
+			}
+			setupNewsItem();
+		} else {
+			String newsListString = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_NEWS, null);
+			if(newsListString == null || newsListString.equals("")) BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_fail));
+			NewsItemList newsItemList = new Gson().fromJson(newsListString, NewsItemList.class);
+			mMainActivity.setNewsList(newsItemList.dataList);
+			setupNewsItem();
 		}
-		setupNewsItem();
 	}
 	
 	private void setupNewsItem() {
-		Collections.sort(mMainActivity.getNewsList(), new NewsItemComparator());
-		for(NewsItem newsItem : mMainActivity.getNewsList()) {
+		Collections.sort(mMainActivity.getNewsList().dataList, new NewsItemComparator());
+		for(NewsItem newsItem : mMainActivity.getNewsList().dataList) {
 			RelativeLayout newsItemLayout = (RelativeLayout)mLayoutInflater.inflate(R.layout.news_item_layout, null);
 //			TextView updateDateTextView = (TextView)newsItemLayout.findViewById(R.id.news_item_update_date);
 			TextView indexTextView = (TextView)newsItemLayout.findViewById(R.id.news_item_index);
@@ -147,7 +177,7 @@ public class NewsFragment extends Fragment {
 			contentTextView.setText(newsItem.content);
 
 			LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-			layoutParams.setMargins(10, 10, 10, 10);
+			layoutParams.setMargins(5, 7, 5, 7);
 			mNewsLinearLayout.addView(newsItemLayout,layoutParams);
 		}
 	}
