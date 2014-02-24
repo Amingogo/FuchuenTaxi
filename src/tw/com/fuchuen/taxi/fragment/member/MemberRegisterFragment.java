@@ -87,7 +87,7 @@ public class MemberRegisterFragment extends Fragment {
 				user.setUsername(mUserNameEditText.getText().toString());
 				user.setPassword(mUserPasswordEditText.getText().toString());
 				user.put(TaxiApiConfig.USER_ACCOUNT, userAccount);
-				user.put(TaxiApiConfig.USER_TAKE_COUNT, "0");
+				user.put(TaxiApiConfig.USER_TAKE_COUNT_CURRENT, "0");
 				user.signUpInBackground(new SignUpCallback() {
 					public void done(ParseException e) {
 					    if (e == null) {
