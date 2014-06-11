@@ -11,6 +11,7 @@
    		android:layout_centerHorizontal="true"
    		android:layout_marginTop="20dp"
    		style="@style/Style_Font_Large_Black_Bold"
+   		android:textSize="18sp"
    		android:text="@string/line_hint_title" />
     
     <TextView 
@@ -19,6 +20,8 @@
    		android:layout_height="wrap_content"
    		android:layout_centerHorizontal="true"
    		android:layout_below="@id/line_hint_title"
+   		android:layout_marginLeft="10dp"
+   		android:layout_marginRight="10dp"
    		style="@style/Style_Font_Small_Black_Bold"
    		android:textColor="@color/red"
    		android:text="@string/line_add_friend_hint" />

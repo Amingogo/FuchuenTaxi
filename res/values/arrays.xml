@@ -3,24 +3,24 @@
     
     <!-- main menu -->
     <string-array name="main_menu_array">
-        <item>最新消息</item>
-        <item>會員專區</item>
-        <item>電話叫車</item>
-        <item>簡訊叫車</item>
-        <item>Email叫車</item>
-        <item>line叫車</item>
-        <item>facebook粉絲團</item>
-        <item>部落格</item>
+        <item>News</item>
+        <item>Member</item>
+        <item>Phone Reservation</item>
+        <item>SMS Reservation</item>
+        <item>Email Reservation</item>
+        <item>Line Reservation</item>
+        <item>Facebook Fans Page</item>
+        <item>Taxi Blog</item>
     </string-array>
     
     <!-- passenger number -->
     <string-array name="passenger_number_array">
-        <item>1人</item>
-        <item>2人</item>
-        <item>3人</item>
-        <item>4人</item>
-        <item>5人</item>
-        <item>6人</item>
+        <item>One people</item>
+        <item>Two people</item>
+        <item>Three people</item>
+        <item>Four people</item>
+        <item>Five people</item>
+        <item>Six people</item>
     </string-array>
     
 </resources>

@@ -2,8 +2,13 @@ package tw.com.fuchuen.taxi.fragment.member;
 
 import tw.com.fuchuen.taxi.R;
 import tw.com.fuchuen.taxi.config.TaxiLocalConfig;
-import tw.com.fuchuen.utils.BasicUtils;
+import tw.com.fuchuen.utils.UtilsCommon;
+import tw.com.fuchuen.utils.UtilsDialog;
+import tw.com.fuchuen.utils.UtilsFragment;
 import tw.com.fuchuen.utils.UtilsLog;
+import tw.com.fuchuen.utils.UtilsStorage;
+import tw.com.fuchuen.utils.UtilsToast;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,6 +35,8 @@ public class MemberLoginFragment extends Fragment {
 	private Button mRegisterButton;
 	
 	private View mProgressLayout;
+	
+	private ProgressDialog mProgressDialog;
 
 	
 	public static Fragment newInstance() {
@@ -71,29 +78,32 @@ public class MemberLoginFragment extends Fragment {
 		mLoginButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(!BasicUtils.haveNetworkConnection(mContext)) {
-					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.login_no_network));
+				if(!UtilsCommon.haveNetworkConnection(mContext)) {
+					UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.login_no_network), true);
 					return;
 				}
 				String userName = mUserNameEditText.getText().toString();
 				String userPassword = mUserPasswordEditText.getText().toString();
 				if(userName.equals("") || userPassword.equals("")) {
-					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_login_leak_info));
+					UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_login_leak_info), true);
 					return;
 				}
+				mProgressDialog = UtilsDialog.getProgressDialog(mContext, getString(R.string.member_user_logining));
+				mProgressDialog.show();
 				ParseUser.logInInBackground(userName, userPassword, new LogInCallback() {
 					@Override
 					public void done(ParseUser user, ParseException e) {
+						UtilsDialog.dismissProgressDialog(mProgressDialog);
 						if(e == null && user != null) {
 							//success
-							BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_login_success));
-							BasicUtils.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_SESSION_TOKEN, user.getSessionToken());
-							BasicUtils.switchToFragmentImmediately(mContext, MemberPageFragment.newInstance(), null, R.id.content_frame, false, false);
+							UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_login_success), true);
+							UtilsStorage.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_SESSION_TOKEN, user.getSessionToken());
+							UtilsFragment.switchToFragmentImmediately(mContext, MemberPageFragment.newInstance(), null, R.id.content_frame, false, false);
 						} else if(user == null) {
 							//usernameOrPasswordIsInvalid
-							BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_login_username_or_password_error));
+							UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_login_username_or_password_error), true);
 						} else {
-							BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_fail));
+							UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_fail), true);
 						}
 					}
 				});
@@ -106,19 +116,19 @@ public class MemberLoginFragment extends Fragment {
 		mRegisterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BasicUtils.switchToFragmentImmediately(mContext, MemberRegisterFragment.newInstance(), null, R.id.content_frame, true, true);
+				UtilsFragment.switchToFragmentImmediately(mContext, MemberRegisterFragment.newInstance(), null, R.id.content_frame, true, true);
 			}
 		});
 	}
 	
 	private void autoSignIn() {
-		String sessionToken = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_SESSION_TOKEN, "");
+		String sessionToken = UtilsStorage.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_SESSION_TOKEN, "");
 		UtilsLog.logDebug(MemberLoginFragment.class, "sessionToken: "+sessionToken);
 		if(sessionToken.equals("")) {
 			mProgressLayout.setVisibility(View.GONE);
 		} else {
-			if(!BasicUtils.haveNetworkConnection(mContext)) {
-				BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.login_no_network));
+			if(!UtilsCommon.haveNetworkConnection(mContext)) {
+				UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.login_no_network), true);
 				mProgressLayout.setVisibility(View.GONE);
 				return;
 			}
@@ -127,14 +137,14 @@ public class MemberLoginFragment extends Fragment {
 				public void done(ParseUser user, ParseException e) {
 					if(e == null && user != null) {
 						//success
-						BasicUtils.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_SESSION_TOKEN, user.getSessionToken());
-						BasicUtils.switchToFragmentImmediately(mContext, MemberPageFragment.newInstance(), null, R.id.content_frame, false, false);
+						UtilsStorage.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_SESSION_TOKEN, user.getSessionToken());
+						UtilsFragment.switchToFragmentImmediately(mContext, MemberPageFragment.newInstance(), null, R.id.content_frame, false, false);
 					} else if(user == null) {
 						//usernameOrPasswordIsInvalid
-						BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_login_username_or_password_error));
+						UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_login_username_or_password_error), true);
 						mProgressLayout.setVisibility(View.GONE);
 					} else {
-						BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_fail));
+						UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_fail), true);
 						mProgressLayout.setVisibility(View.GONE);
 					}
 				}

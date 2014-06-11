@@ -13,8 +13,10 @@ import tw.com.fuchuen.taxi.model.BannerImage;
 import tw.com.fuchuen.taxi.model.BannerImageList;
 import tw.com.fuchuen.taxi.model.NewsItem;
 import tw.com.fuchuen.taxi.model.NewsItemList;
-import tw.com.fuchuen.utils.BasicUtils;
+import tw.com.fuchuen.utils.UtilsCommon;
 import tw.com.fuchuen.utils.UtilsLog;
+import tw.com.fuchuen.utils.UtilsStorage;
+import tw.com.fuchuen.utils.UtilsToast;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -81,7 +83,7 @@ public class NewsFragment extends Fragment {
 	}
 	
 	private void getImageData() {
-		if(BasicUtils.haveNetworkConnection(mContext)) {
+		if(UtilsCommon.haveNetworkConnection(mContext)) {
 			if(mMainActivity.getBannerImageList().dataList.size() == 0) {
 				ParseQuery<ParseObject> query = ParseQuery.getQuery("GalleryImages");
 				query.findInBackground(new FindCallback<ParseObject>() {
@@ -94,11 +96,11 @@ public class NewsFragment extends Fragment {
 								bannerImage.BannerURL = parseObjectList.get(i).getString("imageLink");
 								mMainActivity.getBannerImageList().dataList.add(bannerImage);
 							}
-							BasicUtils.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_IMAGES, new Gson().toJson(mMainActivity.getBannerImageList()));
+							UtilsStorage.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_IMAGES, new Gson().toJson(mMainActivity.getBannerImageList()));
 							setupBanner();
 						} else {
-							String imageListString = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_IMAGES, null);
-							if(imageListString == null || imageListString.equals("")) BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_fail));
+							String imageListString = UtilsStorage.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_IMAGES, null);
+							if(imageListString == null || imageListString.equals("")) UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_fail), true);
 							BannerImageList bannerImageList = new Gson().fromJson(imageListString, BannerImageList.class);
 							mMainActivity.setBannerImageList(bannerImageList.dataList);
 							setupBanner();
@@ -109,8 +111,8 @@ public class NewsFragment extends Fragment {
 			}
 			setupBanner();
 		} else {
-			String imageListString = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_IMAGES, null);
-			if(imageListString == null || imageListString.equals("")) BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_no_network));
+			String imageListString = UtilsStorage.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_IMAGES, null);
+			if(imageListString == null || imageListString.equals("")) UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_no_network), true);
 			BannerImageList bannerImageList = new Gson().fromJson(imageListString, BannerImageList.class);
 			mMainActivity.setBannerImageList(bannerImageList.dataList);
 			setupBanner();
@@ -126,7 +128,7 @@ public class NewsFragment extends Fragment {
 	
 	private void getNewsData() {
 		mNewsLinearLayout = (LinearLayout)mMainView.findViewById(R.id.news_layout);
-		if(BasicUtils.haveNetworkConnection(mContext)) {
+		if(UtilsCommon.haveNetworkConnection(mContext)) {
 			if(mMainActivity.getNewsList().dataList.size() == 0) {
 				ParseQuery<ParseObject> query = ParseQuery.getQuery("News");
 				query.findInBackground(new FindCallback<ParseObject>() {
@@ -141,11 +143,11 @@ public class NewsFragment extends Fragment {
 								newsItem.content = parseObjectList.get(i).getString("content");
 								mMainActivity.getNewsList().dataList.add(newsItem);
 							}
-							BasicUtils.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_NEWS, new Gson().toJson(mMainActivity.getNewsList()));
+							UtilsStorage.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_NEWS, new Gson().toJson(mMainActivity.getNewsList()));
 							setupNewsItem();
 						} else {
-							String newsListString = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_NEWS, null);
-							if(newsListString == null || newsListString.equals("")) BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_no_network));
+							String newsListString = UtilsStorage.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_NEWS, null);
+							if(newsListString == null || newsListString.equals("")) UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_no_network), true);
 							NewsItemList newsItemList = new Gson().fromJson(newsListString, NewsItemList.class);
 							mMainActivity.setNewsList(newsItemList.dataList);
 							setupNewsItem();
@@ -156,8 +158,8 @@ public class NewsFragment extends Fragment {
 			}
 			setupNewsItem();
 		} else {
-			String newsListString = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_NEWS, null);
-			if(newsListString == null || newsListString.equals("")) BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_fail));
+			String newsListString = UtilsStorage.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_CACHE_NEWS, null);
+			if(newsListString == null || newsListString.equals("")) UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.fetch_data_fail), true);
 			NewsItemList newsItemList = new Gson().fromJson(newsListString, NewsItemList.class);
 			mMainActivity.setNewsList(newsItemList.dataList);
 			setupNewsItem();

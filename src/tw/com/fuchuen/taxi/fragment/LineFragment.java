@@ -1,8 +1,13 @@
 package tw.com.fuchuen.taxi.fragment;
 
+import java.util.Locale;
+
 import tw.com.fuchuen.taxi.R;
 import tw.com.fuchuen.taxi.config.TaxiLocalConfig;
-import tw.com.fuchuen.utils.BasicUtils;
+import tw.com.fuchuen.utils.CustomUtils;
+import tw.com.fuchuen.utils.UtilsCommon;
+import tw.com.fuchuen.utils.UtilsStorage;
+import tw.com.fuchuen.utils.UtilsToast;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,26 +55,26 @@ public class LineFragment extends FormFragment {
 		((Button)mMainView.findViewById(R.id.send)).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(!BasicUtils.appInstalled(mContext, mContext.getString(R.string.line_package_name))) {
-					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.line_not_install));
+				if(!UtilsCommon.appInstalled(mContext, mContext.getString(R.string.line_package_name))) {
+					UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.line_not_install), true);
 					return;
 				}
-				final int[] dateArray = BasicUtils.getDateArray(mContext);
-				final int[] timeArray = BasicUtils.getTimeArray(mContext);
-				String passengerName = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_PASSENGER_NAME, "");
-				String passengerCount = (BasicUtils.getSharedPreferences(mContext).getInt(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_PASSENGER_COUNT_POSITION, 0)+1)+mContext.getString(R.string.people);
+				final int[] dateArray = CustomUtils.getDateArray(mContext);
+				final int[] timeArray = CustomUtils.getTimeArray(mContext);
+				String passengerName = UtilsStorage.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_PASSENGER_NAME, "");
+				String passengerCount = (UtilsStorage.getSharedPreferences(mContext).getInt(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_PASSENGER_COUNT_POSITION, 0)+1)+mContext.getString(R.string.people);
 				String date = dateArray[0]+"/"+(dateArray[1]+1)+"/"+dateArray[2];
 				String time = timeArray[0]+":"+timeArray[1];
-				String start = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_START_PLACE, "");
-				String destination = BasicUtils.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_DESTINATION, "");
+				String start = UtilsStorage.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_START_PLACE, "");
+				String destination = UtilsStorage.getSharedPreferences(mContext).getString(TaxiLocalConfig.SHARED_PREFERENCE_TAXI_DESTINATION, "");
 				
 				if(passengerName.equals("") || start.equals("") || destination.equals("")) {
-					BasicUtils.showLongToastMsg(mContext.getApplicationContext(), mContext.getString(R.string.leak_info));
+					UtilsToast.showLongToastMsg(mContext.getApplicationContext(), mContext.getString(R.string.leak_info), true);
 					return;
 				}
 				
 				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("line://msg/text/"+
-						BasicUtils.getMessageString(mContext,
+						CustomUtils.getMessageString(mContext,
 								passengerName,
 								passengerCount,
 								date,
@@ -86,8 +91,8 @@ public class LineFragment extends FormFragment {
 		addLineBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(!BasicUtils.appInstalled(mContext, mContext.getString(R.string.line_package_name))) {
-					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.line_not_install));
+				if(!UtilsCommon.appInstalled(mContext, mContext.getString(R.string.line_package_name))) {
+					UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.line_not_install), true);
 					return;
 				}
 				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://line.naver.jp/ti/p/"+mContext.getString(R.string.driver_line_id)));
@@ -100,8 +105,13 @@ public class LineFragment extends FormFragment {
 		mUpTitleTextView = (TextView)mMainView.findViewById(R.id.line_hint_title);
 		String orignalStr = mContext.getString(R.string.line_hint_title);
 		Spannable span = new SpannableString(orignalStr);
-		span.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.large_word_size)),
-				7, orignalStr.length()-5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		if(Locale.getDefault().equals(Locale.CHINESE) || Locale.getDefault().equals(Locale.TAIWAN) || Locale.getDefault().equals(Locale.CHINA)) {
+			span.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.large_word_size)),
+					7, orignalStr.length()-5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		} else {
+			span.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.large_word_size)),
+					19, orignalStr.length()-13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
 		mUpTitleTextView.setText(span);
 	}
 	

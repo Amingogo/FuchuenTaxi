@@ -1,5 +1,7 @@
 package tw.com.fuchuen.taxi.fragment;
 
+import java.util.Locale;
+
 import tw.com.fuchuen.taxi.R;
 import android.content.Context;
 import android.content.Intent;
@@ -60,8 +62,13 @@ public class PhoneFragment extends Fragment {
 		mUpTitleTextView = (TextView)mMainView.findViewById(R.id.phone_hint_title);
 		String orignalStr = mContext.getString(R.string.phone_hint_title);
 		Spannable span = new SpannableString(orignalStr);
-		span.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.large_word_size)),
-				7, orignalStr.length()-5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		if(Locale.getDefault().equals(Locale.CHINESE) || Locale.getDefault().equals(Locale.TAIWAN) || Locale.getDefault().equals(Locale.CHINA)) {
+			span.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.large_word_size)),
+					7, orignalStr.length()-5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		} else {
+			span.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.large_word_size)),
+					19, orignalStr.length()-13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
 		mUpTitleTextView.setText(span);
 	}
 	

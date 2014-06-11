@@ -72,7 +72,7 @@
 			android:layout_marginTop="10dp"
 			android:background="@drawable/btn_common"
 			style="@style/Style_Font_Large_White_Bold"
-			android:text="@string/member_user_register" />
+			android:text="@string/member_user_free_register" />
         
     </RelativeLayout>
     

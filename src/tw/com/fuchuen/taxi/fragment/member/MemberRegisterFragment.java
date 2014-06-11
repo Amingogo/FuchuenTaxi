@@ -2,7 +2,11 @@ package tw.com.fuchuen.taxi.fragment.member;
 
 import tw.com.fuchuen.taxi.R;
 import tw.com.fuchuen.taxi.config.TaxiApiConfig;
-import tw.com.fuchuen.utils.BasicUtils;
+import tw.com.fuchuen.utils.UtilsCommon;
+import tw.com.fuchuen.utils.UtilsDialog;
+import tw.com.fuchuen.utils.UtilsFragment;
+import tw.com.fuchuen.utils.UtilsToast;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,6 +32,8 @@ public class MemberRegisterFragment extends Fragment {
 	private EditText mUserPasswordConfirmEditText;
 	private EditText mUserAccountEditText;
 	private Button mRegisterButton;
+	
+	private ProgressDialog mProgressDialog;
 
 	
 	public static Fragment newInstance() {
@@ -67,8 +73,8 @@ public class MemberRegisterFragment extends Fragment {
 		mRegisterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(!BasicUtils.haveNetworkConnection(mContext)) {
-					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.register_no_network));
+				if(!UtilsCommon.haveNetworkConnection(mContext)) {
+					UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.register_no_network), true);
 					return;
 				}
 				String userName = mUserNameEditText.getText().toString();
@@ -76,11 +82,11 @@ public class MemberRegisterFragment extends Fragment {
 				String userConfirmPassword = mUserPasswordConfirmEditText.getText().toString();
 				String userAccount = mUserAccountEditText.getText().toString();
 				if(userName.equals("") || userPassword.equals("") || userConfirmPassword.equals("") || userAccount.equals("")) {
-					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_leak_info));
+					UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_leak_info), true);
 					return;
 				}
 				if(!userPassword.equals(userConfirmPassword)) {
-					BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_password_incorrect));
+					UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_password_incorrect), true);
 					return;
 				}
 				ParseUser user = new ParseUser();
@@ -88,17 +94,20 @@ public class MemberRegisterFragment extends Fragment {
 				user.setPassword(mUserPasswordEditText.getText().toString());
 				user.put(TaxiApiConfig.USER_ACCOUNT, userAccount);
 				user.put(TaxiApiConfig.USER_TAKE_COUNT_CURRENT, "0");
+				mProgressDialog = UtilsDialog.getProgressDialog(mContext, getString(R.string.member_user_registering));
+				mProgressDialog.show();
 				user.signUpInBackground(new SignUpCallback() {
 					public void done(ParseException e) {
+						UtilsDialog.dismissProgressDialog(mProgressDialog);
 					    if (e == null) {
-					    	BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_success));
-					    	BasicUtils.popFragment(mContext);
+					    	UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_success), true);
+					    	UtilsFragment.popFragment(mContext);
 					    } else {
 					    	//已被註冊
 					    	if(e.getCode() == 202) {
-					    		BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_user_name_taken));
+					    		UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_user_name_taken), true);
 					    	} else {
-					    		BasicUtils.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_fail));
+					    		UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_fail), true);
 					    	}
 					    }
 					}

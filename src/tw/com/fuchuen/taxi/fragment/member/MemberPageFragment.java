@@ -6,8 +6,9 @@ import tw.com.fuchuen.taxi.R;
 import tw.com.fuchuen.taxi.adapter.TakeCountAdapter;
 import tw.com.fuchuen.taxi.config.TaxiApiConfig;
 import tw.com.fuchuen.taxi.config.TaxiLocalConfig;
-import tw.com.fuchuen.utils.BasicUtils;
+import tw.com.fuchuen.utils.UtilsFragment;
 import tw.com.fuchuen.utils.UtilsLog;
+import tw.com.fuchuen.utils.UtilsStorage;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -87,8 +88,8 @@ public class MemberPageFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				ParseUser.logOut();
-				BasicUtils.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_SESSION_TOKEN, null);
-				BasicUtils.switchToFragmentImmediately(mContext, MemberLoginFragment.newInstance(), null, R.id.content_frame, false, false);
+				UtilsStorage.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_SESSION_TOKEN, null);
+				UtilsFragment.switchToFragmentImmediately(mContext, MemberLoginFragment.newInstance(), null, R.id.content_frame, false, false);
 			}
 		});
 	}
