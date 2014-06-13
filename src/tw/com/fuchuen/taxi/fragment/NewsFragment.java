@@ -3,6 +3,7 @@ package tw.com.fuchuen.taxi.fragment;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import tw.com.amingo.library.customview.BannerAdapter;
 import tw.com.amingo.library.customview.BannerViewPager;
@@ -130,7 +131,15 @@ public class NewsFragment extends Fragment {
 		mNewsLinearLayout = (LinearLayout)mMainView.findViewById(R.id.news_layout);
 		if(UtilsCommon.haveNetworkConnection(mContext)) {
 			if(mMainActivity.getNewsList().dataList.size() == 0) {
-				ParseQuery<ParseObject> query = ParseQuery.getQuery("News");
+				ParseQuery<ParseObject> query = null;
+				Locale currentLocale = getResources().getConfiguration().locale;
+				if(currentLocale.equals(Locale.CHINESE) || currentLocale.equals(Locale.TAIWAN) || currentLocale.equals(Locale.TRADITIONAL_CHINESE)) {
+					query = ParseQuery.getQuery("News");
+				} else if(currentLocale.equals(Locale.CHINA) || currentLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
+					query = ParseQuery.getQuery("NewsCn");
+				} else {
+					query = ParseQuery.getQuery("NewsEn");
+				}
 				query.findInBackground(new FindCallback<ParseObject>() {
 					@Override
 					public void done(List<ParseObject> parseObjectList, ParseException parseException) {
