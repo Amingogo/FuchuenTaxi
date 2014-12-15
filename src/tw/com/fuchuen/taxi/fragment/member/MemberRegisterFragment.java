@@ -2,9 +2,12 @@ package tw.com.fuchuen.taxi.fragment.member;
 
 import tw.com.fuchuen.taxi.R;
 import tw.com.fuchuen.taxi.config.TaxiApiConfig;
+import tw.com.fuchuen.taxi.config.TaxiLocalConfig;
 import tw.com.fuchuen.utils.UtilsCommon;
 import tw.com.fuchuen.utils.UtilsDialog;
 import tw.com.fuchuen.utils.UtilsFragment;
+import tw.com.fuchuen.utils.UtilsLog;
+import tw.com.fuchuen.utils.UtilsStorage;
 import tw.com.fuchuen.utils.UtilsToast;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -17,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -98,11 +102,26 @@ public class MemberRegisterFragment extends Fragment {
 				mProgressDialog.show();
 				user.signUpInBackground(new SignUpCallback() {
 					public void done(ParseException e) {
-						UtilsDialog.dismissProgressDialog(mProgressDialog);
 					    if (e == null) {
-					    	UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_success), true);
-					    	UtilsFragment.popFragment(mContext);
+					    	//先登入
+					    	ParseUser.logInInBackground(mUserNameEditText.getText().toString(), mUserPasswordEditText.getText().toString(), new LogInCallback() {
+					    		@Override
+								public void done(ParseUser user, ParseException e) {
+					    			if(e == null && user != null) {
+					    				UtilsLog.logDebug(MemberRegisterFragment.class, "Auto login success after register.");
+					    			} else if(user == null) {
+					    				UtilsLog.logDebug(MemberRegisterFragment.class, "Auto login fail after register, because user name or password is invalid.");
+					    			} else {
+					    				UtilsLog.logDebug(MemberRegisterFragment.class, "Auto login fail after register, because register fail.");
+					    			}
+					    			UtilsStorage.putSharedPreferencesValue(mContext, TaxiLocalConfig.SHARED_PREFERENCE_TAXI_SESSION_TOKEN, user.getSessionToken());
+					    			UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_success), true);
+							    	UtilsDialog.dismissProgressDialog(mProgressDialog);
+							    	UtilsFragment.popFragment(mContext);
+					    		}
+					    	});
 					    } else {
+					    	UtilsDialog.dismissProgressDialog(mProgressDialog);
 					    	//已被註冊
 					    	if(e.getCode() == 202) {
 					    		UtilsToast.showLongToastMsg(mContext, mContext.getString(R.string.member_user_register_user_name_taken), true);

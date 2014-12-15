@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tw.com.fuchuen.taxi"
-    android:versionCode="10"
-    android:versionName="1.0.5" >
+    android:versionCode="12"
+    android:versionName="1.0.7" >
 
     <uses-sdk android:minSdkVersion="8"
         android:targetSdkVersion="17" />
